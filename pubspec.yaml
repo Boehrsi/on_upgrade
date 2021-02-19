@@ -1,0 +1,24 @@
+name: on_upgrade
+description: Local upgrade checker plugin for Flutter.
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  package_info_plus: ^0.6.4
+  pub_semver: ^1.4.4
+  shared_preferences: ^0.5.12+4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  pedantic: ^1.10.0
+
+flutter:
+
