@@ -31,7 +31,12 @@ class UpgradeWrapper {
   final bool hasError;
   final Exception error;
 
-  UpgradeWrapper({@required this.state, this.lastVersion, this.currentVersion, this.hasError = false, this.error});
+  UpgradeWrapper(
+      {@required this.state,
+      this.lastVersion,
+      this.currentVersion,
+      this.hasError = false,
+      this.error});
 }
 
 /// Contains the upgrade check functionality
@@ -60,17 +65,26 @@ class OnUpgrade {
   /// Must have the signature `Future<bool> func([String version]) async {}`
   final Function customVersionUpdate;
 
-  OnUpgrade({this.keyLastVersion = 'on_upgrade.version', this.customVersionLookup, this.customVersionUpdate});
+  OnUpgrade(
+      {this.keyLastVersion = 'on_upgrade.version',
+      this.customVersionLookup,
+      this.customVersionUpdate});
 
   /// Returns the upgrade state.
   Future<UpgradeWrapper> isNewVersion() async {
     try {
       final lastVersion = await getLastVersion();
       final currentVersion = await getCurrentVersion();
-      final state = lastVersion.compareTo(currentVersion) < 0 ? UpgradeState.upgrade : UpgradeState.noUpgrade;
-      return UpgradeWrapper(state: state, lastVersion: lastVersion, currentVersion: currentVersion);
+      final state = lastVersion.compareTo(currentVersion) < 0
+          ? UpgradeState.upgrade
+          : UpgradeState.noUpgrade;
+      return UpgradeWrapper(
+          state: state,
+          lastVersion: lastVersion,
+          currentVersion: currentVersion);
     } catch (exception) {
-      return UpgradeWrapper(state: UpgradeState.unknown, hasError: true, error: exception);
+      return UpgradeWrapper(
+          state: UpgradeState.unknown, hasError: true, error: exception);
     }
   }
 
@@ -83,7 +97,9 @@ class OnUpgrade {
   /// Returns the last known version. Call [updateLastVersion] to update this value
   Future<Version> getLastVersion() async {
     final versionString = await _getLastVersionString();
-    return versionString != null && versionString.isNotEmpty ? Version.parse(versionString) : Version.none;
+    return versionString != null && versionString.isNotEmpty
+        ? Version.parse(versionString)
+        : Version.none;
   }
 
   /// Returns the currently running version
