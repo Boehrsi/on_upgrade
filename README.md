@@ -6,9 +6,9 @@ Local upgrade checker plugin for Flutter.
 
 A simple upgrade checker to migrate data between app updates or to display a change log with new features to your users.
 
-- Contains a default implementation using the shared preferences of the platform to persist value
-- Minimal effort to check if an app update was performed and to updated the persisted values
-- Possibility to implement custom getters and setters for the persisted version interaction (e.g. if the last known app version is already persisted in a database)
+- Contains a default implementation using the shared preferences of the platform to persist the last known version
+- Minimal effort to check if an app update is given and to updated the persisted values
+- Possibility to implement custom getters and setters for the persisted version interaction (e.g. if the last known app version is already available via a database)
 
 ## Usage
 
