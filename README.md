@@ -1,6 +1,6 @@
 # OnUpgrade
 
-Local upgrade checker plugin for Flutter.
+Local upgrade checker plugin for Flutter. Enables the developer to easily migrate data between upgrades or to show users a new features dialog.
 
 ## Features
 

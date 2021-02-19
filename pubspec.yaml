@@ -1,5 +1,5 @@
 name: on_upgrade
-description: Local upgrade checker plugin. Provides the ability to compare the currently running app version against a saved one. Enables the developer to easily migrate data between upgrades or to show users a new features dialog.
+description: Local upgrade checker plugin. Provides the ability to compare the currently running app version against a saved one.
 version: 0.0.2
 homepage: https://github.com/Boehrsi/on_upgrade
 
