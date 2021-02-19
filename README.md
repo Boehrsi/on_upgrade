@@ -1,14 +1,47 @@
-# on_upgrade
+# OnUpgrade
 
 Local upgrade checker plugin for Flutter.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+A simple upgrade checker to migrate data between app updates or to display a change log with new features to your users.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+- Contains a default implementation using the shared preferences of the platform to persist value
+- Minimal effort to check if an app update was performed and to updated the persisted values
+- Possibility to implement custom getters and setters for the persisted version interaction (e.g. if the last known app version is already persisted in a database)
+
+## Usage
+
+For full examples please see the [example app](https://github.com/Boehrsi/on_upgrade/blob/main/example/lib/main.dart).
+
+### Default implementation
+
+```dart
+final onUpgrade = OnUpgrade();
+final isNewVersion = await onUpgrade.isNewVersion();
+if (isNewVersion.isUpdate == UpgradeState.upgrade) {
+  await onUpgrade.updateLastVersion();
+  myDataMigration();
+  myShowUserNewFeaturesDialog();
+}
+```
+
+### Custom implementation
+
+```dart
+Future<String> _customVersionGetter() async {
+    // Your implementation
+}
+
+Future<bool> _customVersionSetter([String version]) async {
+    // Your implementation
+}
+
+final onUpgradeCustom = OnUpgrade(customVersionUpdate: _customVersionSetter, customVersionLookup: _customVersionGetter);
+final isNewVersion = await _onUpgradeCustom.isNewVersion();
+if (isNewVersion.state == UpgradeState.upgrade) {
+  await _onUpgradeCustom.updateLastVersion();
+  myDataMigration();
+  myShowUserNewFeaturesDialog();
+}
+```
