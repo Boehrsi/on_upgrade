@@ -47,12 +47,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _showLastVersion() {
     _onUpgrade.getLastVersion().then((value) {
       setState(() {
-        _lastVersion = value.toString();
+        _lastVersion = value;
       });
     });
     _onUpgradeCustom.getLastVersion().then((value) {
       setState(() {
-        _customLastVersion = value.toString();
+        _customLastVersion = value;
       });
     });
   }
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _showCurrentVersion() {
     _onUpgrade.getCurrentVersion().then((value) {
       setState(() {
-        _currentVersion = value.toString();
+        _currentVersion = value;
       });
     });
   }

@@ -3,15 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void mockChannelResponse(MethodChannel channel, String method, dynamic returnValue) {
-  channel.setMockMethodCallHandler((MethodCall methodCall) async {
-    if (methodCall.method == method) {
-      return returnValue;
-    }
-    throw MissingPluginException();
-  });
-}
-
 void mockSharedPreferences(Map<String, dynamic> values) {
   SharedPreferences.setMockInitialValues(values);
 }
