@@ -19,10 +19,10 @@ For full examples please see the [example app](https://github.com/Boehrsi/on_upg
 ```dart
 final onUpgrade = OnUpgrade();
 final isNewVersion = await onUpgrade.isNewVersion();
-if (isNewVersion.isUpdate == UpgradeState.upgrade) {
+if (isNewVersion.state == UpgradeState.upgrade) {
   await onUpgrade.updateLastVersion();
-  myDataMigration();
-  myShowUserNewFeaturesDialog();
+  myDataMigration(isNewVersion.currentVersion);
+  myShowUserNewFeaturesDialog(isNewVersion.currentVersion);
 }
 ```
 
@@ -41,7 +41,7 @@ final onUpgradeCustom = OnUpgrade(customVersionUpdate: _customVersionSetter, cus
 final isNewVersion = await _onUpgradeCustom.isNewVersion();
 if (isNewVersion.state == UpgradeState.upgrade) {
   await _onUpgradeCustom.updateLastVersion();
-  myDataMigration();
-  myShowUserNewFeaturesDialog();
+  myDataMigration(isNewVersion.currentVersion);
+  myShowUserNewFeaturesDialog(isNewVersion.currentVersion);
 }
 ```

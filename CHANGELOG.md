@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Readme fixes
+
 ## 0.1.0
 
 - **Breaking change:** `UpgradeWrapper.lastVersion`, `UpgradeWrapper.currentVersion`, `getLastVersion()` and `getCurrentVersion()` now return Strings.
