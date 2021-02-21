@@ -24,7 +24,7 @@ void main() {
     expect(result, false);
   });
 
-  test('Is unknown', () async {
+  test('Is unknown, null values', () async {
     final onUpgrade = OnUpgrade();
     mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
 
@@ -32,6 +32,19 @@ void main() {
 
     expect(result.state, UpgradeState.unknown);
     expect(result.hasError, true);
+  });
+
+  test('Is unknown, empty current version', () async {
+    final onUpgrade = OnUpgrade();
+    mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
+    mockPackageInfo(appName: 'test', packageName: 'package.test', version: '', buildNumber: '2');
+
+    var result = await onUpgrade.isNewVersion();
+
+    expect(result.state, UpgradeState.unknown);
+    expect(result.hasError, true);
+    expect(result.error.runtimeType, FormatException);
+    expect((result.error as FormatException).message, "Couldn't load currentVersion");
   });
 
   test('Is upgrade', () async {
@@ -55,6 +68,15 @@ void main() {
   });
 
   test('Update last version', () async {
+    final onUpgrade = OnUpgrade();
+    mockPackageInfo(appName: 'test', packageName: 'package.test', version: '0.0.1', buildNumber: '1');
+
+    final result = await onUpgrade.updateLastVersion();
+
+    expect(result, true);
+  });
+
+  test('Update last version with value', () async {
     final onUpgrade = OnUpgrade();
 
     final result = await onUpgrade.updateLastVersion('0.0.3');
