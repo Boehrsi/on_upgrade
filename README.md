@@ -35,7 +35,7 @@ More information on [pub.dev](https://pub.dev/packages/on_upgrade).
 
 For full examples please see the [example app](https://github.com/Boehrsi/on_upgrade/blob/main/example/lib/main.dart).
 
-### Default implementation
+### Default Implementation
 
 ```dart
 final onUpgrade = OnUpgrade();
@@ -47,7 +47,7 @@ if (isNewVersion.state == UpgradeState.upgrade) {
 }
 ```
 
-### Custom implementation
+### Custom Implementation
 
 ```dart
 Future<String> _customVersionGetter() async {
