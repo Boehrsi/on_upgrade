@@ -29,7 +29,7 @@ dependencies:
   on_upgrade: ^0.1.1
 ```
 
-More information on [pub.dev](https://pub.dev/packages/on_upgrade)
+More information on [pub.dev](https://pub.dev/packages/on_upgrade).
 
 ### Examples
 
