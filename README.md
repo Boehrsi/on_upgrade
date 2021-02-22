@@ -1,3 +1,11 @@
+![Pub Version](https://img.shields.io/pub/v/on_upgrade)
+[![codecov](https://codecov.io/gh/Boehrsi/on_upgrade/branch/main/graph/badge.svg?token=7XPRP9UMLF)](https://codecov.io/gh/Boehrsi/on_upgrade)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/boehrsi/on_upgrade/Test%20and%20upload%20coverage)
+![GitHub](https://img.shields.io/github/license/boehrsi/on_upgrade)
+[![likes](https://badges.bar/on_upgrade/likes)](https://pub.dev/packages/on_upgrade/score)
+[![popularity](https://badges.bar/on_upgrade/popularity)](https://pub.dev/packages/on_upgrade/score)
+[![pub points](https://badges.bar/on_upgrade/pub%20points)](https://pub.dev/packages/on_upgrade/score) 
+
 # OnUpgrade
 
 Local upgrade checker plugin for Flutter. Enables the developer to easily migrate data between upgrades or to show users a new features dialog.
@@ -11,6 +19,19 @@ A simple upgrade checker to migrate data between app updates or to display a cha
 - Possibility to implement custom getters and setters for the persisted version interaction (e.g. if the last known app version is already available via a database)
 
 ## Usage
+
+### Getting Started
+
+Add this to your package's `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  on_upgrade: ^0.1.1
+```
+
+More information on [pub.dev](https://pub.dev/packages/on_upgrade)
+
+### Examples
 
 For full examples please see the [example app](https://github.com/Boehrsi/on_upgrade/blob/main/example/lib/main.dart).
 
