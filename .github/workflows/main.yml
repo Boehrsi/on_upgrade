@@ -5,21 +5,17 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  setup:
+  analyze:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-  analyze:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
       - uses: axel-op/dart-package-analyzer@v3
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
   test:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
         with:
           channel: dev
