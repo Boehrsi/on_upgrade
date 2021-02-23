@@ -1,12 +1,25 @@
-name: Test and upload coverage
+name: Main
 on:
   push:
     branches: [main, develop]
+  pull_request:
+    branches: [main]
 jobs:
-  package-analysis:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+  analyze:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: axel-op/dart-package-analyzer@v3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
       - uses: subosito/flutter-action@v1
         with:
           channel: dev

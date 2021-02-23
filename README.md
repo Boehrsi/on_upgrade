@@ -1,6 +1,6 @@
 [![Pub Version](https://img.shields.io/pub/v/on_upgrade)](https://pub.dev/packages/on_upgrade)
 [![codecov](https://codecov.io/gh/Boehrsi/on_upgrade/branch/main/graph/badge.svg?token=7XPRP9UMLF)](https://codecov.io/gh/Boehrsi/on_upgrade)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/boehrsi/on_upgrade/Test%20and%20upload%20coverage)](https://github.com/Boehrsi/on_upgrade/actions)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/boehrsi/on_upgrade/Main)](https://github.com/Boehrsi/on_upgrade/actions)
 [![GitHub](https://img.shields.io/github/license/boehrsi/on_upgrade)](https://github.com/Boehrsi/on_upgrade/blob/main/LICENSE)
 [![likes](https://badges.bar/on_upgrade/likes)](https://pub.dev/packages/on_upgrade/score)
 [![popularity](https://badges.bar/on_upgrade/popularity)](https://pub.dev/packages/on_upgrade/score)
