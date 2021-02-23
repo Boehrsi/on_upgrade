@@ -1,9 +1,9 @@
 name: Analyze
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 jobs:
   package-analysis:
     runs-on: ubuntu-latest
