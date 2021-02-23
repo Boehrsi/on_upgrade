@@ -8,7 +8,6 @@
 /// [package_info_plus](https://pub.dev/packages/package_info_plus).
 library on_upgrade;
 
-import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,18 +24,24 @@ enum UpgradeState {
 /// If an error occurred [hasError] is **true**, [state] is [UpgradeState.unknown] and the error reason is returned in [error].
 class UpgradeWrapper {
   final UpgradeState state;
-  final String lastVersion;
-  final String currentVersion;
+  final String? lastVersion;
+  final String? currentVersion;
   final bool hasError;
-  final Exception error;
+  final Exception? error;
 
   UpgradeWrapper(
-      {@required this.state,
+      {required this.state,
       this.lastVersion,
       this.currentVersion,
       this.hasError = false,
       this.error});
 }
+
+/// Custom version lookup with the signature `Future<String> func() async {}`. Must return an empty string if no last version is given during initial start.
+typedef VersionLookup = Future<String> Function();
+
+/// Custom version update with the signature `Future<bool> func([String version]) async {}`. Use `OnUpgrade().getCurrentVersionString` to get the currently running app version.
+typedef VersionUpdate = Future<bool> Function([String? version]);
 
 /// Contains the upgrade check functionality
 ///
@@ -58,13 +63,11 @@ class OnUpgrade {
   /// Configures a custom key used in the shared preferences. Defaults to `on_upgrade.version`
   final String keyLastVersion;
 
-  /// Optional current version getter. If set [keyLastVersion] isn't used and [customVersionUpdate] is required to be also set.
-  /// Must have the signature `Future<String> func() async {}` and must return an empty string if no last version is given during initial start.
-  final Function customVersionLookup;
+  /// Optional last version getter. If set [keyLastVersion] isn't used and [customVersionUpdate] is required to be also set.
+  final VersionLookup? customVersionLookup;
 
-  /// Optional current version setter. If set [keyLastVersion] isn't used and [customVersionLookup] is required to be also set
-  /// Must have the signature `Future<bool> func([String version]) async {}`
-  final Function customVersionUpdate;
+  /// Optional last version setter. If set [keyLastVersion] isn't used and [customVersionLookup] is required to be also set
+  final VersionUpdate? customVersionUpdate;
 
   OnUpgrade(
       {this.keyLastVersion = 'on_upgrade.version',
@@ -92,13 +95,13 @@ class OnUpgrade {
   /// Returns if the current app start is the first start overall.
   Future<bool> isInitialInstallation() async {
     final version = await _getLastVersionString();
-    return version != null && version.isEmpty;
+    return version.isEmpty;
   }
 
   /// Returns the last known version or '0.0.0' as initial fallback value. Call [updateLastVersion] to update this value
   Future<String> getLastVersion() async {
     final version = await _getLastVersionString();
-    return version != null && version.isNotEmpty ? version : _fallbackVersion;
+    return version.isNotEmpty ? version : _fallbackVersion;
   }
 
   /// Returns the currently running version
@@ -107,34 +110,25 @@ class OnUpgrade {
     return packageInfo.version;
   }
 
-  /// Returns the currently running version as [String]
-  Future<String> getCurrentVersionString() async {
-    return (await getCurrentVersion()).toString();
-  }
-
   /// Sets the last know version and persists it. If called without parameter the currently running version is set.
-  Future<bool> updateLastVersion([String version]) async {
+  Future<bool> updateLastVersion([String? version]) async {
     if (customVersionUpdate != null) {
-      return customVersionUpdate(version);
+      return customVersionUpdate!(version);
     }
-    version ??= await getCurrentVersionString();
+    version ??= await getCurrentVersion();
     final prefs = await SharedPreferences.getInstance();
     return prefs.setString(keyLastVersion, version);
   }
 
   Future<String> _getLastVersionString() async {
     if (customVersionLookup != null) {
-      return customVersionLookup();
+      return customVersionLookup!();
     }
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(keyLastVersion) ?? '';
   }
 
   bool _checkNewVersion(String lastVersion, String currentVersion) {
-    if (lastVersion == null || currentVersion == null) {
-      throw FormatException(
-          'Both lastVersion and currentVersion must be non null');
-    }
     if (currentVersion.isEmpty) {
       throw FormatException("Couldn't load currentVersion");
     }

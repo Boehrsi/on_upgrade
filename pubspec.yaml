@@ -1,22 +1,22 @@
 name: on_upgrade
 description: Local upgrade checker plugin. Provides the ability to compare the currently running app version against a saved one.
-version: 0.1.1
+version: 1.0.0-nullsafety.0
 homepage: https://github.com/Boehrsi/on_upgrade
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0-259.12.beta <3.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  package_info_plus: ^0.6.4
-  shared_preferences: ^0.5.12+4
+  package_info_plus: ^1.0.0-nullsafety.0
+  shared_preferences: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  pedantic: ^1.9.2
+  pedantic: ^1.10.0
 
 flutter:
 

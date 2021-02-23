@@ -1,3 +1,11 @@
+## 1.0.0-nullsafety.0
+
+- Migrate to null-safety
+- Add typedefs for custom functions
+- Update documentation
+- Update dependencies
+- Clean up code and update tests
+
 ## 0.1.1
 
 - Readme fixes

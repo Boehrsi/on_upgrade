@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   OnUpgrade _onUpgradeCustom;
 
   String _lastVersion;
-  String _customLastVersion;
+  String _customLastVersion = '';
   String _currentVersion;
 
   @override
@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (version != null) {
         _customLastVersion = version;
       } else {
-        final currentVersion = await _onUpgradeCustom.getCurrentVersionString();
+        final currentVersion = await _onUpgradeCustom.getCurrentVersion();
         _customLastVersion = currentVersion;
       }
       return true;

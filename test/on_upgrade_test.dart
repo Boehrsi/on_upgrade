@@ -8,7 +8,7 @@ void main() {
 
   test('Is initial', () async {
     final onUpgrade = OnUpgrade();
-    mockSharedPreferences(<String, dynamic>{});
+    mockSharedPreferences(<String, Object>{});
 
     var result = await onUpgrade.isInitialInstallation();
 
@@ -17,26 +17,16 @@ void main() {
 
   test('Is not initial', () async {
     final onUpgrade = OnUpgrade();
-    mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
+    mockSharedPreferences(<String, Object>{onUpgrade.keyLastVersion: '0.0.1'});
 
     var result = await onUpgrade.isInitialInstallation();
 
     expect(result, false);
   });
 
-  test('Is unknown, null values', () async {
-    final onUpgrade = OnUpgrade();
-    mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
-
-    var result = await onUpgrade.isNewVersion();
-
-    expect(result.state, UpgradeState.unknown);
-    expect(result.hasError, true);
-  });
-
   test('Is unknown, empty current version', () async {
     final onUpgrade = OnUpgrade();
-    mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
+    mockSharedPreferences(<String, Object>{onUpgrade.keyLastVersion: '0.0.1'});
     mockPackageInfo(appName: 'test', packageName: 'package.test', version: '', buildNumber: '2');
 
     var result = await onUpgrade.isNewVersion();
@@ -49,7 +39,7 @@ void main() {
 
   test('Is upgrade', () async {
     final onUpgrade = OnUpgrade();
-    mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
+    mockSharedPreferences(<String, Object>{onUpgrade.keyLastVersion: '0.0.1'});
     mockPackageInfo(appName: 'test', packageName: 'package.test', version: '0.0.2', buildNumber: '2');
 
     var result = await onUpgrade.isNewVersion();
@@ -59,7 +49,7 @@ void main() {
 
   test('Is no upgrade', () async {
     final onUpgrade = OnUpgrade();
-    mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
+    mockSharedPreferences(<String, Object>{onUpgrade.keyLastVersion: '0.0.1'});
     mockPackageInfo(appName: 'test', packageName: 'package.test', version: '0.0.1', buildNumber: '1');
 
     var result = await onUpgrade.isNewVersion();
@@ -86,7 +76,7 @@ void main() {
 
   test('Get last version', () async {
     final onUpgrade = OnUpgrade();
-    mockSharedPreferences(<String, dynamic>{onUpgrade.keyLastVersion: '0.0.1'});
+    mockSharedPreferences(<String, Object>{onUpgrade.keyLastVersion: '0.0.1'});
 
     var result = await onUpgrade.getLastVersion();
 
@@ -103,8 +93,8 @@ void main() {
   });
 
   test('Custom lookup / update last version', () async {
-    Future<bool> update([String version]) async => true;
     Future<String> lookup() async => '1.0.0';
+    Future<bool> update([String? version]) async => true;
     final onUpgrade = OnUpgrade(customVersionLookup: lookup, customVersionUpdate: update);
 
     var lookupResult = await onUpgrade.getLastVersion();
