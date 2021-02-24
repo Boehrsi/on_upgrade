@@ -1,3 +1,7 @@
+## 1.0.0-nullsafety.3
+
+- Remove pubspec.lock file
+
 ## 1.0.0-nullsafety.2
 
 - Fix pub score issues
