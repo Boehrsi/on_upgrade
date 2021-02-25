@@ -120,14 +120,14 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0-nullsafety.2"
+    version: "1.0.0-nullsafety.3"
   package_info_plus:
     dependency: transitive
     description:
       name: package_info_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0-nullsafety.0"
+    version: "1.0.0-nullsafety.1"
   package_info_plus_linux:
     dependency: transitive
     description:
@@ -225,7 +225,7 @@ packages:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   shared_preferences_linux:
     dependency: transitive
     description:

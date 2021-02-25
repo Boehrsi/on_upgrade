@@ -1,3 +1,7 @@
+## 1.0.0-nullsafety.4
+
+- Update dependencies
+
 ## 1.0.0-nullsafety.3
 
 - Remove pubspec.lock file
