@@ -26,7 +26,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  on_upgrade: ^0.1.1
+  on_upgrade: ^1.0.0
 ```
 
 More information on [pub.dev](https://pub.dev/packages/on_upgrade).
@@ -60,9 +60,9 @@ Future<bool> _customVersionSetter([String version]) async {
 }
 
 final onUpgradeCustom = OnUpgrade(customVersionUpdate: _customVersionSetter, customVersionLookup: _customVersionGetter);
-final isNewVersion = await _onUpgradeCustom.isNewVersion();
+final isNewVersion = await onUpgradeCustom.isNewVersion();
 if (isNewVersion.state == UpgradeState.upgrade) {
-  await _onUpgradeCustom.updateLastVersion();
+  await onUpgradeCustom.updateLastVersion();
   myDataMigration(isNewVersion.currentVersion);
   myShowUserNewFeaturesDialog(isNewVersion.currentVersion);
 }
