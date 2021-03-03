@@ -1,26 +1,12 @@
-## 1.0.0-nullsafety.4
-
-- Update dependencies
-
-## 1.0.0-nullsafety.3
-
-- Remove pubspec.lock file
-
-## 1.0.0-nullsafety.2
-
-- Fix pub score issues
-
-## 1.0.0-nullsafety.1
-
-- Fix pub score issues
-
-## 1.0.0-nullsafety.0
+## 1.0.0
 
 - Migrate to null-safety
 - Add typedefs for custom functions
 - Update documentation
 - Update dependencies
 - Clean up code and update tests
+- Fix pub score issues
+- Remove pubspec.lock file
 
 ## 0.1.1
 
