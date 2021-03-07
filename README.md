@@ -8,15 +8,13 @@
 
 # OnUpgrade
 
-Local upgrade checker plugin for Flutter. Enables the developer to easily migrate data between upgrades or to show users a new features dialog.
+A simple upgrade checker plugin, to e.g. migrate data between app updates or to display a change log with new features to your users.
 
 ## Features
 
-A simple upgrade checker to migrate data between app updates or to display a change log with new features to your users.
-
 - Contains a default implementation using the shared preferences of the platform to persist the last known version
-- Minimal effort to check if an app update is given and to updated the persisted values
-- Possibility to implement custom getters and setters for the persisted version interaction (e.g. if the last known app version is already available via a database)
+- Minimal effort to check if an app upgrade is given and to update the persisted value
+- Possibility to implement custom getters and setters for the persisted version (e.g. if the last known app version is already available via a database)
 
 ## Usage
 
