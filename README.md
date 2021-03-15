@@ -50,11 +50,12 @@ if (isNewVersion.state == UpgradeState.upgrade) {
 ```dart
 Future<String> _customVersionGetter() async {
     // Your implementation. Load the last known version.
-    // Must return an empty string if no initial version is known (first app start, before calling updateLastVersion().
+    // Must return an empty string if no initial version is known (on the first app start, before updateLastVersion() was called the first time).
 }
 
 Future<bool> _customVersionSetter([String version]) async {
-    // Your implementation. Update the last known version, after performing the upgrade check and starting all migration / information actions.
+    // Your implementation. Update the last known version.
+    // Perform the upgrade check before calling this function.
 }
 
 final onUpgradeCustom = OnUpgrade(customVersionUpdate: _customVersionSetter, customVersionLookup: _customVersionGetter);
