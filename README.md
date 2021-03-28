@@ -66,3 +66,7 @@ if (isNewVersion.state == UpgradeState.upgrade) {
   myShowUserNewFeaturesDialog(isNewVersion.currentVersion);
 }
 ```
+
+## How to contribute
+
+If you are interested in contributing, please have a look into the [contribution guide](https://github.com/Boehrsi/on_upgrade/blob/main/CONTRIBUTING.md). Every idea, bug report or line of code is heavily appreciated.
