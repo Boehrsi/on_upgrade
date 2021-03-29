@@ -1,3 +1,9 @@
+## 1.0.1
+
+- Update documentation
+- Update dependencies
+- Fix lint warnings
+
 ## 1.0.0
 
 - Migrate to null-safety
