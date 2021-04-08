@@ -38,7 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _onUpgradeCustom = OnUpgrade(customVersionUpdate: _customVersionSetter, customVersionLookup: _customVersionGetter);
+    _onUpgradeCustom = OnUpgrade(
+        customVersionUpdate: _customVersionSetter,
+        customVersionLookup: _customVersionGetter);
 
     _showLastVersion();
     _showCurrentVersion();

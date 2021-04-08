@@ -24,7 +24,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  on_upgrade: ^1.0.1
+  on_upgrade: ^1.1.0
 ```
 
 More information on [pub.dev](https://pub.dev/packages/on_upgrade).
@@ -39,31 +39,29 @@ For full examples please see the [example app](https://github.com/Boehrsi/on_upg
 final onUpgrade = OnUpgrade();
 final isNewVersion = await onUpgrade.isNewVersion();
 if (isNewVersion.state == UpgradeState.upgrade) {
+  myDataMigrationOrNewFeatureDialog(isNewVersion.currentVersion!);
   await onUpgrade.updateLastVersion();
-  myDataMigration(isNewVersion.currentVersion);
-  myShowUserNewFeaturesDialog(isNewVersion.currentVersion);
 }
 ```
 
 ### Custom Implementation
 
 ```dart
-Future<String> _customVersionGetter() async {
+Future<String> customVersionGetter() async {
     // Your implementation. Load the last known version.
     // Must return an empty string if no initial version is known (on the first app start, before updateLastVersion() was called the first time).
 }
 
-Future<bool> _customVersionSetter([String version]) async {
+Future<bool> customVersionSetter([String? version]) async {
     // Your implementation. Update the last known version.
     // Perform the upgrade check before calling this function.
 }
 
-final onUpgradeCustom = OnUpgrade(customVersionUpdate: _customVersionSetter, customVersionLookup: _customVersionGetter);
-final isNewVersion = await onUpgradeCustom.isNewVersion();
-if (isNewVersion.state == UpgradeState.upgrade) {
-  await onUpgradeCustom.updateLastVersion();
-  myDataMigration(isNewVersion.currentVersion);
-  myShowUserNewFeaturesDialog(isNewVersion.currentVersion);
+final onUpgradeCustom = OnUpgrade(customVersionUpdate: customVersionSetter, customVersionLookup: customVersionGetter);
+final isCustomNewVersion = await onUpgradeCustom.isNewVersion();
+if (isCustomNewVersion.state == UpgradeState.upgrade) {
+  myDataMigrationOrNewFeatureDialog(isCustomNewVersion.currentVersion!);
+  await onUpgrade.updateLastVersion();
 }
 ```
 

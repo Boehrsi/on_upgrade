@@ -9,6 +9,7 @@
 library on_upgrade;
 
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum UpgradeState {
@@ -35,12 +36,40 @@ class UpgradeWrapper {
       this.currentVersion,
       this.hasError = false,
       this.error});
+
+  /// Wraps the upgrade execution
+  ///
+  /// Provide a sorted (oldest to newest version) map of version strings and executable methods in [upgrades] (e.g. `<String, Function>{'0.0.9': yourFunction}`).
+  /// All string / method pairs fitting into the upgrade range will be executed (minimal version exclusive, maximal version inclusive).
+  /// This method is `async` to allow e.g. database operations. All upgrade methods will be executed `async` in the given order.
+  ///
+  /// Returns a list of executed version strings. An empty list means no upgrades were performed. A `null` value is returned if the [UpgradeWrapper] wasn't
+  /// in a valid state during execution.
+  Future<List<String>?> executeUpgrades(Map<String, Function> upgrades) async {
+    if (state == UpgradeState.upgrade) {
+      final upgradesCopy = {...upgrades};
+      final lastVersion = Version.parse(this.lastVersion!);
+      final currentVersion = Version.parse(this.currentVersion!);
+      final range =
+          VersionRange(min: lastVersion, max: currentVersion, includeMax: true);
+
+      upgradesCopy
+          .removeWhere((key, value) => !range.allows(Version.parse(key)));
+      await Future.forEach(
+          upgradesCopy.values, (Function upgrade) async => await upgrade());
+      return upgradesCopy.keys.toList();
+    } else if (state == UpgradeState.noUpgrade) {
+      return <String>[];
+    } else {
+      return null;
+    }
+  }
 }
 
 /// Custom version lookup with the signature `Future<String> func() async {}`. Must return an empty string if no last version is given during initial start.
 typedef VersionLookup = Future<String> Function();
 
-/// Custom version update with the signature `Future<bool> func([String version]) async {}`. Use `OnUpgrade().getCurrentVersionString` to get the currently running app version.
+/// Custom version update with the signature `Future<bool> func([String? version]) async {}`. Use `OnUpgrade().getCurrentVersionString` to get the currently running app version.
 typedef VersionUpdate = Future<bool> Function([String? version]);
 
 /// Contains the upgrade check functionality
@@ -51,10 +80,9 @@ typedef VersionUpdate = Future<bool> Function([String? version]);
 /// ```dart
 /// final onUpgrade = OnUpgrade();
 /// final isNewVersion = await onUpgrade.isNewVersion();
-/// if (isNewVersion.isUpdate == UpgradeState.upgrade) {
-///   await onUpgrade.updateLastVersion();
-///   myDataMigration();
-///   myShowUserNewFeaturesDialog();
+/// if (isNewVersion.state == UpgradeState.upgrade) {
+/// myDataMigrationOrNewFeatureDialog(isNewVersion.currentVersion!);
+/// await onUpgrade.updateLastVersion();
 /// }
 /// ```
 class OnUpgrade {
@@ -128,10 +156,12 @@ class OnUpgrade {
     return prefs.getString(keyLastVersion) ?? '';
   }
 
-  bool _checkNewVersion(String lastVersion, String currentVersion) {
-    if (currentVersion.isEmpty) {
+  bool _checkNewVersion(String lastVersionString, String currentVersionString) {
+    if (currentVersionString.isEmpty) {
       throw FormatException("Couldn't load currentVersion");
     }
-    return lastVersion != currentVersion;
+    final lastVersion = Version.parse(lastVersionString);
+    final currentVersion = Version.parse(currentVersionString);
+    return lastVersion.compareTo(currentVersion) == -1;
   }
 }
