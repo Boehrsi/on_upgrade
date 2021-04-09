@@ -22,6 +22,8 @@ void mockPackageInfo({
 // Dummy methods
 void myDataMigrationOrNewFeatureDialog(String currentVersion) {}
 
+void myDataMigrationOrNewFeatureDialogForVersion1() {}
+
 Future<String> customVersionGetter() async {
   return '';
 }

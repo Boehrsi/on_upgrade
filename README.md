@@ -44,6 +44,21 @@ if (isNewVersion.state == UpgradeState.upgrade) {
 }
 ```
 
+#### Execute managed / multiple upgrades
+
+```dart
+final upgrades = {
+      '1.0.0': myDataMigrationOrNewFeatureDialogForVersion1
+    };
+
+final onMultipleUpgrade = OnUpgrade();
+final isNewVersionMultiple = await onMultipleUpgrade.isNewVersion();
+if (isNewVersionMultiple.state == UpgradeState.upgrade) {
+  await isNewVersionMultiple.executeUpgrades(upgrades);
+  await onMultipleUpgrade.updateLastVersion();
+}
+```
+
 ### Custom Implementation
 
 ```dart

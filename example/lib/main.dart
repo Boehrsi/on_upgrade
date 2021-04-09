@@ -13,27 +13,28 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'On Upgrade Demo Home Page'),
+      home: MainScreen(title: 'On Upgrade Example'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  MainScreen({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MainScreenState extends State<MainScreen> {
   final _onUpgrade = OnUpgrade();
   OnUpgrade _onUpgradeCustom;
 
   String _lastVersion;
   String _customLastVersion = '';
   String _currentVersion;
+  var _multipleUpgradeProgress = 0.0;
 
   @override
   void initState() {
@@ -84,6 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('Check and update version'),
             ),
             OutlinedButton(
+              onPressed: _executeMultipleUpgrades,
+              child: Text('Check and execute multiple upgrades'),
+            ),
+            Visibility(
+              visible: _multipleUpgradeProgress > 0.0,
+              child: LinearProgressIndicator(value: _multipleUpgradeProgress),
+            ),
+            OutlinedButton(
               onPressed: _resetLastVersion,
               child: Text('Reset last version'),
             ),
@@ -114,9 +123,46 @@ class _MyHomePageState extends State<MyHomePage> {
     if (isNewVersion.state == UpgradeState.upgrade) {
       await _onUpgrade.updateLastVersion();
       _showLastVersion();
-      _showSnackbar('An update was detected.');
+      _showSnackbar('An upgrade was detected.');
     } else {
-      _showSnackbar('No update.');
+      _showSnackbar('No upgrade.');
+    }
+  }
+
+  Future<void> _executeMultipleUpgrades() async {
+    final upgrades = {
+      '0.0.5': () async {
+        setState(() => _multipleUpgradeProgress = 0.1);
+        await Future.delayed(Duration(seconds: 2), () => setState(() => _multipleUpgradeProgress = 0.5));
+        _showSnackbar('0.0.5 migration done');
+      },
+      '0.5.0': () async {
+        await Future.delayed(Duration(seconds: 3), () => setState(() => _multipleUpgradeProgress = 1));
+        _showSnackbar('0.5.0 migration done');
+        await Future.delayed(Duration(seconds: 2), () {});
+      },
+      '1.0.0': () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('1.0.0 - Nothing new'),
+            content: Text('We just added more ads!'),
+          ),
+        );
+      },
+      '2.0.0': () {
+        // Shouldn't get executed
+        throw AssertionError("This method shouldn't get executed");
+      },
+    };
+
+    final isNewVersion = await _onUpgrade.isNewVersion();
+    if (isNewVersion.state == UpgradeState.upgrade) {
+      await isNewVersion.executeUpgrades(upgrades);
+      await _onUpgrade.updateLastVersion();
+      _showLastVersion();
+    } else {
+      _showSnackbar('No upgrade.');
     }
   }
 
@@ -149,9 +195,9 @@ class _MyHomePageState extends State<MyHomePage> {
     if (isNewVersion.state == UpgradeState.upgrade) {
       await _onUpgradeCustom.updateLastVersion();
       _showLastVersion();
-      _showSnackbar('A custom update was detected.');
+      _showSnackbar('A custom upgrade was detected.');
     } else {
-      _showSnackbar('No custom update.');
+      _showSnackbar('No custom upgrade.');
     }
   }
 
@@ -166,7 +212,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _resetLastVersion() async {
     await _onUpgrade.updateLastVersion('');
     _showLastVersion();
+    _resetMultipleProgress();
   }
+
+  void _resetMultipleProgress() => setState(() => _multipleUpgradeProgress = 0.0);
 
   Future<void> _resetCustomLastVersion() async {
     await _onUpgradeCustom.updateLastVersion('');

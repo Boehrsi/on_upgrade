@@ -209,5 +209,16 @@ void main() {
       myDataMigrationOrNewFeatureDialog(isCustomNewVersion.currentVersion!);
       await onUpgrade.updateLastVersion();
     }
+
+    final upgrades = {
+      '1.0.0': myDataMigrationOrNewFeatureDialogForVersion1
+    };
+
+    final onMultipleUpgrade = OnUpgrade();
+    final isNewVersionMultiple = await onMultipleUpgrade.isNewVersion();
+    if (isNewVersionMultiple.state == UpgradeState.upgrade) {
+      await isNewVersionMultiple.executeUpgrades(upgrades);
+      await onMultipleUpgrade.updateLastVersion();
+    }
   });
 }
