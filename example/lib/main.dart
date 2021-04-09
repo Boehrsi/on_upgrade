@@ -133,11 +133,13 @@ class _MainScreenState extends State<MainScreen> {
     final upgrades = {
       '0.0.5': () async {
         setState(() => _multipleUpgradeProgress = 0.1);
-        await Future.delayed(Duration(seconds: 2), () => setState(() => _multipleUpgradeProgress = 0.5));
+        await Future.delayed(Duration(seconds: 2),
+            () => setState(() => _multipleUpgradeProgress = 0.5));
         _showSnackbar('0.0.5 migration done');
       },
       '0.5.0': () async {
-        await Future.delayed(Duration(seconds: 3), () => setState(() => _multipleUpgradeProgress = 1));
+        await Future.delayed(Duration(seconds: 3),
+            () => setState(() => _multipleUpgradeProgress = 1));
         _showSnackbar('0.5.0 migration done');
         await Future.delayed(Duration(seconds: 2), () {});
       },
@@ -215,7 +217,8 @@ class _MainScreenState extends State<MainScreen> {
     _resetMultipleProgress();
   }
 
-  void _resetMultipleProgress() => setState(() => _multipleUpgradeProgress = 0.0);
+  void _resetMultipleProgress() =>
+      setState(() => _multipleUpgradeProgress = 0.0);
 
   Future<void> _resetCustomLastVersion() async {
     await _onUpgradeCustom.updateLastVersion('');
