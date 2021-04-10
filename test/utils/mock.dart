@@ -24,6 +24,8 @@ void myDataMigrationOrNewFeatureDialog(String currentVersion) {}
 
 void myDataMigrationOrNewFeatureDialogForVersion1() {}
 
+void myDataMigrationOrNewFeatureDialogForVersion15() {}
+
 Future<String> customVersionGetter() async {
   return '';
 }

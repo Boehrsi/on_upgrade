@@ -248,7 +248,10 @@ void main() {
       await onUpgrade.updateLastVersion();
     }
 
-    final upgrades = {'1.0.0': myDataMigrationOrNewFeatureDialogForVersion1};
+    final upgrades = {
+      '1.0.0': myDataMigrationOrNewFeatureDialogForVersion1,
+      '1.5.0': myDataMigrationOrNewFeatureDialogForVersion15
+    };
 
     final onMultipleUpgrade = OnUpgrade();
     final isNewVersionMultiple = await onMultipleUpgrade.isNewVersion();

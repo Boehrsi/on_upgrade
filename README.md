@@ -48,7 +48,8 @@ if (isNewVersion.state == UpgradeState.upgrade) {
 
 ```dart
 final upgrades = {
-  '1.0.0': myDataMigrationOrNewFeatureDialogForVersion1
+  '1.0.0': myDataMigrationOrNewFeatureDialogForVersion1,
+  '1.5.0': myDataMigrationOrNewFeatureDialogForVersion15
 };
 
 final onMultipleUpgrade = OnUpgrade();
