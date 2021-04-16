@@ -15,6 +15,7 @@ A simple upgrade checker plugin, to e.g. migrate data between app updates or to 
 - Contains a default implementation using the shared preferences of the platform to persist the last known version
 - Minimal effort to check if an app upgrade is given and to update the persisted value
 - Possibility to implement custom getters and setters for the persisted version (e.g. if the last known app version is already available via a database)
+- Helper to easily execute all fitting / relevant updates
 
 ## Usage
 
