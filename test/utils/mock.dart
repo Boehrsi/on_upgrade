@@ -13,10 +13,12 @@ void mockPackageInfo({
   required String buildNumber,
 }) {
   PackageInfo.setMockInitialValues(
-      version: version,
-      appName: appName,
-      buildNumber: buildNumber,
-      packageName: packageName);
+    version: version,
+    appName: appName,
+    buildNumber: buildNumber,
+    packageName: packageName,
+    buildSignature: 'mock',
+  );
 }
 
 // Dummy methods
