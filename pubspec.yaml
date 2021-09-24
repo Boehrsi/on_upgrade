@@ -10,9 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  package_info_plus: ^1.0.4
-  pub_semver: ^2.0.0
-  shared_preferences: ^2.0.6
+  package_info_plus: ^1.0.6
+  pub_semver: ^2.1.0
+  shared_preferences: ^2.0.8
 
 dev_dependencies:
   flutter_test:
