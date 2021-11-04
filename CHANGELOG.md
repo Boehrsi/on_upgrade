@@ -1,5 +1,10 @@
 ## 1.1.0
 
+- Update dependencies
+- Update documentation
+
+## 1.1.0
+
 - Add managed / multiple upgrades via `UpgradeWrapper.executeUpgrades()` 
 - Update dependencies
 - Update documentation
