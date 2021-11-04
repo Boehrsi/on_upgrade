@@ -25,7 +25,7 @@ This project tries to adhere to the following guidelines in terms of code struct
 
 To ensure the code is formatted well we additionally use some tooling.
 
-- [pedantic package ](https://pub.dev/packages/pedantic)
+- [flutter_lints](https://pub.dev/packages/flutter_lints)
 
 # Git conventions
 
