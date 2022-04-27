@@ -25,7 +25,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  on_upgrade: ^1.1.0
+  on_upgrade: ^1.1.2
 ```
 
 More information on [pub.dev](https://pub.dev/packages/on_upgrade).
@@ -43,6 +43,10 @@ if (isNewVersion.state == UpgradeState.upgrade) {
   myDataMigrationOrNewFeatureDialog(isNewVersion.currentVersion!);
   await onUpgrade.updateLastVersion();
 }
+
+void myDataMigrationOrNewFeatureDialog(String version) {
+  ...
+}
 ```
 
 #### Execute managed / multiple upgrades
@@ -58,6 +62,14 @@ final isNewVersionMultiple = await onMultipleUpgrade.isNewVersion();
 if (isNewVersionMultiple.state == UpgradeState.upgrade) {
   await isNewVersionMultiple.executeUpgrades(upgrades);
   await onMultipleUpgrade.updateLastVersion();
+}
+
+void myDataMigrationOrNewFeatureDialogForVersion1() {
+  ...
+}
+
+void myDataMigrationOrNewFeatureDialogForVersion15() {
+  ...
 }
 ```
 
@@ -79,6 +91,10 @@ final isCustomNewVersion = await onUpgradeCustom.isNewVersion();
 if (isCustomNewVersion.state == UpgradeState.upgrade) {
   myDataMigrationOrNewFeatureDialog(isCustomNewVersion.currentVersion!);
   await onUpgrade.updateLastVersion();
+}
+
+void myDataMigrationOrNewFeatureDialog(String version) {
+  ...
 }
 ```
 

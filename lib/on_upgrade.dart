@@ -158,7 +158,7 @@ class OnUpgrade {
 
   bool _checkNewVersion(String lastVersionString, String currentVersionString) {
     if (currentVersionString.isEmpty) {
-      throw FormatException("Couldn't load currentVersion");
+      throw const FormatException("Couldn't load currentVersion");
     }
     final lastVersion = Version.parse(lastVersionString);
     final currentVersion = Version.parse(currentVersionString);
