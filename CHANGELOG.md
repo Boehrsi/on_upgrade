@@ -1,3 +1,8 @@
+## 1.1.2
+
+- Update dependencies
+- Update documentation
+
 ## 1.1.1
 
 - Update dependencies
