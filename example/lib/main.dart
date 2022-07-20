@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:on_upgrade/on_upgrade.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,18 +15,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainScreen(title: 'On Upgrade Example'),
+      home: const MainScreen(title: 'On Upgrade Example'),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key key, this.title}) : super(key: key);
+  const MainScreen({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -82,11 +84,11 @@ class _MainScreenState extends State<MainScreen> {
             Text('Current version: $_currentVersion'),
             OutlinedButton(
               onPressed: _checkAndUpdateVersion,
-              child: Text('Check and update version'),
+              child: const Text('Check and update version'),
             ),
             OutlinedButton(
               onPressed: _executeMultipleUpgrades,
-              child: Text('Check and execute multiple upgrades'),
+              child: const Text('Check and execute multiple upgrades'),
             ),
             Visibility(
               visible: _multipleUpgradeProgress > 0.0,
@@ -94,21 +96,21 @@ class _MainScreenState extends State<MainScreen> {
             ),
             OutlinedButton(
               onPressed: _resetLastVersion,
-              child: Text('Reset last version'),
+              child: const Text('Reset last version'),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Divider(),
             ),
             Text('Known custom version: $_customLastVersion'),
             Text('Current version: $_currentVersion'),
             OutlinedButton(
               onPressed: _checkAndUpdateCustomVersion,
-              child: Text('Check and update custom version'),
+              child: const Text('Check and update custom version'),
             ),
             OutlinedButton(
               onPressed: _resetCustomLastVersion,
-              child: Text('Reset custom last version'),
+              child: const Text('Reset custom last version'),
             ),
           ],
         ),
@@ -133,20 +135,20 @@ class _MainScreenState extends State<MainScreen> {
     final upgrades = {
       '0.0.5': () async {
         setState(() => _multipleUpgradeProgress = 0.1);
-        await Future.delayed(Duration(seconds: 2),
+        await Future.delayed(const Duration(seconds: 2),
             () => setState(() => _multipleUpgradeProgress = 0.5));
         _showSnackbar('0.0.5 migration done');
       },
       '0.5.0': () async {
-        await Future.delayed(Duration(seconds: 3),
+        await Future.delayed(const Duration(seconds: 3),
             () => setState(() => _multipleUpgradeProgress = 1));
         _showSnackbar('0.5.0 migration done');
-        await Future.delayed(Duration(seconds: 2), () {});
+        await Future.delayed(const Duration(seconds: 2), () {});
       },
       '1.0.0': () {
         showDialog(
           context: context,
-          builder: (context) => AlertDialog(
+          builder: (context) => const AlertDialog(
             title: Text('1.0.0 - Nothing new'),
             content: Text('We just added more ads!'),
           ),
