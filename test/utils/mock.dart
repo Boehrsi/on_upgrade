@@ -18,6 +18,7 @@ void mockPackageInfo({
     buildNumber: buildNumber,
     packageName: packageName,
     buildSignature: 'mock',
+    installerStore: null
   );
 }
 
