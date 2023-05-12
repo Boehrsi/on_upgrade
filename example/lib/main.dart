@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:on_upgrade/on_upgrade.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const OnUpgradeExample());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+class OnUpgradeExample extends StatelessWidget {
+  const OnUpgradeExample({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key key, this.title}) : super(key: key);
+  const MainScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -31,11 +31,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final _onUpgrade = OnUpgrade();
-  OnUpgrade _onUpgradeCustom;
+  late OnUpgrade _onUpgradeCustom;
 
-  String _lastVersion;
+  String _lastVersion = '';
   String _customLastVersion = '';
-  String _currentVersion;
+  String _currentVersion = '';
   var _multipleUpgradeProgress = 0.0;
 
   @override
@@ -180,7 +180,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   // Saving the version, e.g. to a database
-  Future<bool> _customVersionSetter([String version]) async {
+  Future<bool> _customVersionSetter([String? version]) async {
     return Future.delayed(const Duration(milliseconds: 500), () async {
       if (version != null) {
         _customLastVersion = version;
