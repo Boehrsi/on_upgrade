@@ -25,7 +25,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  on_upgrade: ^1.1.7
+  on_upgrade: ^1.1.8
 ```
 
 More information on [pub.dev](https://pub.dev/packages/on_upgrade).
