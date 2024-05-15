@@ -1,3 +1,8 @@
+## 1.1.11
+
+- Update dependencies
+- Update example
+
 ## 1.1.10
 
 - Update dependencies
