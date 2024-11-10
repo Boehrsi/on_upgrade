@@ -42,8 +42,9 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _onUpgradeCustom = OnUpgrade(
-        customVersionUpdate: _customVersionSetter,
-        customVersionLookup: _customVersionGetter);
+      customVersionUpdate: _customVersionSetter,
+      customVersionLookup: _customVersionGetter,
+    );
 
     _showLastVersion();
     _showCurrentVersion();

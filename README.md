@@ -79,12 +79,12 @@ if (isNewVersionMultiple.state == UpgradeState.upgrade) {
   await onMultipleUpgrade.updateLastVersion();
 }
 
-void myDataMigrationOrNewFeatureDialogForVersion1() {
-  ...
+Future<void> myDataMigrationOrNewFeatureDialogForVersion1() async {
+  // Upgrade method can be async
 }
 
 void myDataMigrationOrNewFeatureDialogForVersion15() {
-  ...
+  // Upgrade method can be sync
 }
 ```
 
