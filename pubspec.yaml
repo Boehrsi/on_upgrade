@@ -1,7 +1,10 @@
 name: on_upgrade
 description: Local upgrade checker plugin. Provides the ability to compare the currently running app version against a saved one.
-version: 1.1.11
+version: 1.2.0
 homepage: https://github.com/Boehrsi/on_upgrade
+repository: https://github.com/Boehrsi/on_upgrade/
+issue_tracker: https://github.com/Boehrsi/on_upgrade/issues
+topics: [ update, upgrade, utils ]
 
 environment:
   sdk: ">=2.12.0 <4.0.0"
@@ -19,5 +22,11 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ">=3.0.2 <6.0.0"
 
-flutter:
+platforms:
+  android:
+  ios:
+  web:
 
+screenshots:
+  - description: The bloc package logo.
+    path: screenshots/screenshot.png
