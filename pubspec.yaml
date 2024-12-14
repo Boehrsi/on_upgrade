@@ -28,5 +28,5 @@ platforms:
   web:
 
 screenshots:
-  - description: The bloc package logo.
+  - description: Screenshot of On Upgrade.
     path: screenshots/screenshot.png
