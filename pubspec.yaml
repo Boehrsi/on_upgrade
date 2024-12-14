@@ -26,7 +26,3 @@ platforms:
   android:
   ios:
   web:
-
-screenshots:
-  - description: Screenshot of On Upgrade.
-    path: screenshots/screenshot.png
