@@ -3,7 +3,7 @@
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Boehrsi/on_upgrade/main.yml)](https://github.com/Boehrsi/on_upgrade/actions)
 [![GitHub](https://img.shields.io/github/license/boehrsi/on_upgrade)](https://github.com/Boehrsi/on_upgrade/blob/main/LICENSE)
 [![likes](https://img.shields.io/pub/likes/on_upgrade)](https://pub.dev/packages/on_upgrade/score)
-[![popularity](https://img.shields.io/pub/popularity/on_upgrade)](https://pub.dev/packages/on_upgrade/score)
+[![pub downloads](https://img.shields.io/pub/dm/on_upgrade)](https://pub.dev/packages/on_upgrade/score)
 [![pub points](https://img.shields.io/pub/points/on_upgrade)](https://pub.dev/packages/on_upgrade/score)
 
 # OnUpgrade
