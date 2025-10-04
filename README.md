@@ -40,7 +40,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  on_upgrade: ^1.2.0
+  on_upgrade: ^1.3.0
 ```
 
 More information on [pub.dev](https://pub.dev/packages/on_upgrade).
