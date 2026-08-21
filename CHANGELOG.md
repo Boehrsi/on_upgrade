@@ -1,3 +1,8 @@
+## 1.3.1
+
+- Update dependencies
+- Update example
+
 ## 1.3.0
 
 - Update dependencies
